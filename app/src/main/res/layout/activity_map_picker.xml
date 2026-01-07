@@ -1,0 +1,68 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFDE7"
+    android:padding="8dp">
+
+    <!-- Map -->
+    <org.osmdroid.views.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- LatLng info (center top) -->
+    <TextView
+        android:id="@+id/tvLatLng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lat: 0.0 | Lng: 0.0"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:background="#CCFFD54F"
+        android:textColor="#5D4037"
+        android:textStyle="bold"
+        android:elevation="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:clipToOutline="true"/>
+
+    <!-- Horizontal button bar -->
+    <LinearLayout
+        android:id="@+id/buttonBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="16dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:gravity="center_vertical"
+        android:spacing="8dp">
+
+        <Button
+            android:id="@+id/btnMyLocation"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="My Location"
+            android:backgroundTint="#FFCA28"
+            android:textColor="#5D4037"
+            android:textStyle="bold"
+            android:elevation="4dp"
+            android:clipToOutline="true"/>
+
+        <Button
+            android:id="@+id/btnConfirm"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Confirm Location"
+            android:backgroundTint="#FFD54F"
+            android:textColor="#5D4037"
+            android:textStyle="bold"
+            android:elevation="6dp"
+            android:clipToOutline="true"/>
+    </LinearLayout>
+
+</RelativeLayout>
