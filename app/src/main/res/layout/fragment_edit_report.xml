@@ -302,5 +302,16 @@
             android:textStyle="bold"
             android:layout_marginTop="16dp"/>
 
+        <!-- Delete Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDelete"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Delete Report"
+            android:backgroundTint="#E53935"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"/>
+
     </LinearLayout>
 </ScrollView>

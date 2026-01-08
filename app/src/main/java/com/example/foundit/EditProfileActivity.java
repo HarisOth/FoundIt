@@ -100,7 +100,6 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onCancelled(@NonNull com.google.firebase.database.DatabaseError error) { }
         });
 
-        // pilih gambar
         imgProfileEdit.setOnClickListener(v -> {
             Intent gallery = new Intent(Intent.ACTION_PICK);
             gallery.setType("image/*");

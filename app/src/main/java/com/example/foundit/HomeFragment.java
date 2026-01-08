@@ -7,8 +7,9 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,12 +17,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
@@ -29,6 +35,7 @@ public class HomeFragment extends Fragment {
     private EditText etSearch;
     private RecyclerView recyclerReports;
     private FloatingActionButton fabAddReport;
+    private View btnFilter;
 
     private ReportAdapter adapter;
     private ArrayList<ReportItem> reportList;
@@ -45,26 +52,23 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // Initialize views
         cardLost = view.findViewById(R.id.cardLost);
         cardFound = view.findViewById(R.id.cardFound);
         etSearch = view.findViewById(R.id.etSearch);
         recyclerReports = view.findViewById(R.id.recyclerReports);
         fabAddReport = view.findViewById(R.id.fabAddReport);
+        btnFilter = view.findViewById(R.id.btnFilter);
 
-        // Init lists
         reportList = new ArrayList<>();
         filteredList = new ArrayList<>();
 
         currentUserId = FirebaseAuth.getInstance().getCurrentUser() != null ?
                 FirebaseAuth.getInstance().getCurrentUser().getUid() : "anonymous";
 
-        // Adapter
         adapter = new ReportAdapter(getActivity(), filteredList, currentUserId);
         recyclerReports.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerReports.setAdapter(adapter);
 
-        // Firebase reference
         databaseReports = FirebaseDatabase.getInstance(
                         "https://foundit-24436-default-rtdb.asia-southeast1.firebasedatabase.app")
                 .getReference("reports");
@@ -76,7 +80,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void setupListeners() {
-        // Lost / Found filter
         cardLost.setOnClickListener(v -> {
             cardLost.setSelected(true);
             cardFound.setSelected(false);
@@ -89,39 +92,28 @@ public class HomeFragment extends Fragment {
             filterByCategory("Found");
         });
 
-        // Search filter
         etSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void afterTextChanged(Editable s) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 filterBySearch(s.toString());
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {}
         });
 
-        // FAB + button open Add/Edit options
         fabAddReport.setOnClickListener(v -> showAddEditOptions());
+        btnFilter.setOnClickListener(v -> showFilterBottomSheet());
     }
 
     private void showAddEditOptions() {
-        // Inflate bottom sheet layout
         View sheetView = getLayoutInflater().inflate(R.layout.bottom_sheet_add_edit, null);
-
-        sheetView.findViewById(R.id.btnAddReport).setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), ReportActivity.class));
-        });
-
-        sheetView.findViewById(R.id.btnEditReport).setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), EditReportActivity.class));
-        });
+        sheetView.findViewById(R.id.btnAddReport).setOnClickListener(v ->
+                startActivity(new Intent(getActivity(), ReportActivity.class)));
+        sheetView.findViewById(R.id.btnEditReport).setOnClickListener(v ->
+                startActivity(new Intent(getActivity(), EditReportActivity.class)));
 
         BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
         dialog.setContentView(sheetView);
-        dialog.setCancelable(true);
         dialog.show();
     }
 
@@ -134,10 +126,7 @@ public class HomeFragment extends Fragment {
                     ReportItem item = snap.getValue(ReportItem.class);
                     if (item != null) reportList.add(item);
                 }
-                // Default: show all
-                filteredList.clear();
-                filteredList.addAll(reportList);
-                adapter.notifyDataSetChanged();
+                sortByLatest(); // default
             }
 
             @Override
@@ -148,7 +137,8 @@ public class HomeFragment extends Fragment {
     private void filterByCategory(String category) {
         filteredList.clear();
         for (ReportItem item : reportList) {
-            if (item.getCategory() != null && item.getCategory().equalsIgnoreCase(category)) {
+            if (item.getCategory() != null &&
+                    item.getCategory().equalsIgnoreCase(category)) {
                 filteredList.add(item);
             }
         }
@@ -157,9 +147,86 @@ public class HomeFragment extends Fragment {
 
     private void filterBySearch(String query) {
         filteredList.clear();
-        String lowerQuery = query.toLowerCase();
+        String q = query.toLowerCase();
         for (ReportItem item : reportList) {
-            if (item.getItemName() != null && item.getItemName().toLowerCase().contains(lowerQuery)) {
+            if (item.getItemName() != null &&
+                    item.getItemName().toLowerCase().contains(q)) {
+                filteredList.add(item);
+            }
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    private void showFilterBottomSheet() {
+        BottomSheetDialog sheetDialog = new BottomSheetDialog(getActivity());
+        View view = getLayoutInflater().inflate(R.layout.bottom_sheet_filter, null);
+
+        LinearLayout container = view.findViewById(R.id.filterContainer);
+        container.removeAllViews();
+
+        String[] filters = {"Latest", "Rating", "Open", "Claimed", "Resolved"};
+        for (String f : filters) {
+            TextView tv = new TextView(getContext());
+            tv.setText(f);
+            tv.setTextSize(16f);
+            tv.setPadding(24, 24, 24, 24);
+            tv.setTextColor(getResources().getColor(android.R.color.black, null));
+            tv.setOnClickListener(v -> {
+                applyFilter(f);
+                sheetDialog.dismiss();
+            });
+            container.addView(tv);
+        }
+
+        sheetDialog.setContentView(view);
+        sheetDialog.show();
+    }
+
+    private void applyFilter(String filter) {
+        switch (filter) {
+            case "Latest":
+                sortByLatest();
+                break;
+            case "Rating":
+                sortByRating();
+                break;
+            case "Open":
+            case "Claimed":
+            case "Resolved":
+                filterByStatus(filter.toLowerCase());
+                break;
+        }
+    }
+
+    private void sortByLatest() {
+        filteredList.clear();
+        filteredList.addAll(reportList);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+        Collections.sort(filteredList, (a, b) -> {
+            try {
+                Date d1 = sdf.parse(a.getDate());
+                Date d2 = sdf.parse(b.getDate());
+                if (d1 == null || d2 == null) return 0;
+                return d2.compareTo(d1);
+            } catch (ParseException e) {
+                return 0;
+            }
+        });
+        adapter.notifyDataSetChanged();
+    }
+
+    private void sortByRating() {
+        filteredList.clear();
+        filteredList.addAll(reportList);
+        Collections.sort(filteredList, (a, b) -> Integer.compare(b.getLikesCount(), a.getLikesCount()));
+        adapter.notifyDataSetChanged();
+    }
+
+    private void filterByStatus(String status) {
+        filteredList.clear();
+        for (ReportItem item : reportList) {
+            if (item.getStatus() != null &&
+                    item.getStatus().equalsIgnoreCase(status)) {
                 filteredList.add(item);
             }
         }

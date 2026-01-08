@@ -15,11 +15,9 @@ public class NotificationItem {
         this.read = read;
     }
 
-    // ===== ID GET/SET =====
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
-    // ===== Other fields =====
     public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
 

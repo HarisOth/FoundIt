@@ -46,7 +46,7 @@ public class ImagePreviewFragment extends DialogFragment {
             }
         }
 
-        imageView.setOnClickListener(v -> dismiss()); // tap untuk tutup popup
+        imageView.setOnClickListener(v -> dismiss());
 
         return view;
     }

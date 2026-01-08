@@ -21,19 +21,15 @@ import java.util.ArrayList;
  */
 public class ImageAdapter extends BaseAdapter {
 
-    // Holds the context (used to create views)
     private Context context;
 
-    // List of image file paths
     private ArrayList<String> imagePaths;
 
-    // Constructor to initialize context and list of image paths
     public ImageAdapter(Context context, ArrayList<String> imagePaths) {
         this.context = context;
         this.imagePaths = imagePaths;
     }
 
-    // Returns the total number of images in the list
     @Override
     public int getCount() {
         return imagePaths.size();
@@ -56,13 +52,11 @@ public class ImageAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
 
-        // If convertView is null, create a new ImageView
         if (convertView == null) {
             imageView = new ImageView(context);
             imageView.setLayoutParams(new ViewGroup.LayoutParams(300, 300)); // Set size of each image
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP); // Crop the image to fill the ImageView
         } else {
-            // Reuse the old view to improve performance
             imageView = (ImageView) convertView;
         }
 

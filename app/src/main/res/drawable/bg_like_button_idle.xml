@@ -1,8 +1,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
 
-    <!-- Latar belakang kelabu lembut -->
-    <solid android:color="#E6B0B0B0" />  <!-- kelabu 90% -->
+    <solid android:color="#E6B0B0B0" />
 
     <!-- Border kelabu -->
     <stroke

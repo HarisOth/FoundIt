@@ -13,7 +13,6 @@ public class ReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
 
-        // Masukkan ReportFragment ke dalam container
         if (savedInstanceState == null) {
             ReportFragment fragment = new ReportFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

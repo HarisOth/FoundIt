@@ -16,7 +16,7 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_splash);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.parseColor("#FFFDE7")); // warna cerah
+            getWindow().setStatusBarColor(Color.parseColor("#FFFDE7"));
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

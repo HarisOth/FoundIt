@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
-import android.widget.Toast;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -133,7 +133,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
             public void onCancelled(@NonNull DatabaseError error) {}
         });
 
-        // ===== LIKE CLICK + PUSH NOTIFICATION =====
+        // ===== LIKE CLICK & NOTIFICATION =====
         if (!item.getOwnerId().equals(currentUserId)) {
             holder.btnLike.setVisibility(View.VISIBLE);
             holder.btnLike.setOnClickListener(v -> {
@@ -146,25 +146,11 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
                         } else {
                             likesRef.child(currentUserId).setValue(true);
 
-                            // Push notification with id
-                            DatabaseReference notifRef = FirebaseDatabase.getInstance(
-                                            "https://foundit-24436-default-rtdb.asia-southeast1.firebasedatabase.app")
-                                    .getReference("notifications")
-                                    .child(item.getOwnerId())
-                                    .push();
-
-                            NotificationItem notif = new NotificationItem(
-                                    "Someone liked your report: \"" + item.getItemName() + "\"",
-                                    System.currentTimeMillis(),
-                                    false
+                            // ✅ Push notification to owner
+                            pushNotificationToOwner(
+                                    item.getOwnerId(),
+                                    "Someone liked your report \"" + item.getItemName() + "\""
                             );
-                            // Set ID to the Firebase key
-                            notifRef.setValue(notif, (error, ref) -> {
-                                if (error == null) {
-                                    notif.setId(ref.getKey());
-                                    ref.setValue(notif); // update with ID
-                                }
-                            });
                         }
                     }
 
@@ -175,6 +161,24 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
         } else {
             holder.btnLike.setVisibility(View.GONE);
         }
+    }
+
+    /* ================= NOTIFICATION ================= */
+    private void pushNotificationToOwner(String ownerId, String message) {
+        DatabaseReference ref = FirebaseDatabase.getInstance(
+                        "https://foundit-24436-default-rtdb.asia-southeast1.firebasedatabase.app")
+                .getReference("notifications")
+                .child(ownerId)
+                .push();
+
+        NotificationItem item = new NotificationItem(
+                message,
+                System.currentTimeMillis(),
+                false
+        );
+
+        // ✅ Tulis ke Firebase supaya AlertsFragment owner nampak
+        ref.setValue(item);
     }
 
     @Override

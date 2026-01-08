@@ -10,7 +10,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!-- Popup container untuk item_report_card -->
+    <!-- Search + Filter bar -->
+    <LinearLayout
+        android:id="@+id/searchFilterContainer"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:layout_margin="12dp"
+        android:gravity="center_vertical"
+        android:background="#CCFFFFFF"
+        android:padding="4dp">
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="Search item name"
+            android:padding="8dp"
+            android:background="#FFF9C4"
+            android:textColor="#5D4037" />
+
+        <ImageView
+            android:id="@+id/btnFilter"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:padding="12dp"
+            android:src="@drawable/ic_filter"
+            android:contentDescription="Filter" />
+    </LinearLayout>
+
+    <!-- Popup container -->
     <FrameLayout
         android:id="@+id/popupContainer"
         android:layout_width="match_parent"

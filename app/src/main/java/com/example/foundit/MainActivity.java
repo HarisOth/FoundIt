@@ -90,6 +90,12 @@ public class MainActivity extends AppCompatActivity {
         setupBackPressHandler();
     }
 
+    public void goToHomeFragment() {
+        if (bottomNavigationView != null) {
+            bottomNavigationView.setSelectedItemId(R.id.nav_home);
+        }
+    }
+
     private void requestNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)

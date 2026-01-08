@@ -49,7 +49,6 @@ public class ProfileFragment extends Fragment {
             requireActivity().getWindow().setStatusBarColor(Color.parseColor("#FFFDE7"));
         }
 
-// Tukar icon status bar jadi gelap (untuk background cerah)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requireActivity().getWindow().getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -137,7 +136,7 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    // ===== helper buat circular bitmap =====
+    // ===== helper make circular bitmap =====
     private Bitmap getCircularBitmap(Bitmap bitmap) {
         int size = Math.min(bitmap.getWidth(), bitmap.getHeight());
         Bitmap output = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);

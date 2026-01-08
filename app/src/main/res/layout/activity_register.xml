@@ -16,7 +16,7 @@
 
         <!-- Logo/App Name -->
 
-        <!-- Sign Up image - DI TENGAH -->
+        <!-- Sign Up image -->
 
         <TextView
             android:id="@+id/appTitle"

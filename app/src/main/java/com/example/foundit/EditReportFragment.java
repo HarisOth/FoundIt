@@ -55,7 +55,7 @@ public class EditReportFragment extends Fragment {
     private TextInputEditText etItemName, etDescription, etLocation, etContact, etDate;
     private RadioGroup rgCategory, rgStatus;
     private RadioButton rbLost, rbFound, rbOpen, rbClaimed, rbResolved;
-    private MaterialButton btnUpdate, btnCapture, btnGallery, btnPickLocation;
+    private MaterialButton btnUpdate, btnDelete, btnCapture, btnGallery, btnPickLocation;
     private ImageView imageView;
     private TextView tvLatLng;
 
@@ -71,7 +71,6 @@ public class EditReportFragment extends Fragment {
 
     private ReportItem report;
 
-    // ===== NEW: helper untuk adapter =====
     public static Bundle newBundle(ReportItem report) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("report", report);
@@ -89,15 +88,13 @@ public class EditReportFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             requireActivity().getWindow().setStatusBarColor(Color.parseColor("#FFFDE7"));
         }
-
-        // Tukar icon status bar jadi gelap (untuk background cerah)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requireActivity().getWindow().getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             );
         }
 
-        // ====== FIND VIEWS ======
+        // ===== FIND VIEWS =====
         etItemName = view.findViewById(R.id.etItemName);
         etDescription = view.findViewById(R.id.etDescription);
         etLocation = view.findViewById(R.id.etLocation);
@@ -114,6 +111,7 @@ public class EditReportFragment extends Fragment {
         rbResolved = view.findViewById(R.id.rbResolved);
 
         btnUpdate = view.findViewById(R.id.btnUpdate);
+        btnDelete = view.findViewById(R.id.btnDelete);
         btnCapture = view.findViewById(R.id.btnCapture);
         btnGallery = view.findViewById(R.id.btnGallery);
         btnPickLocation = view.findViewById(R.id.btnPickLocation);
@@ -129,7 +127,7 @@ public class EditReportFragment extends Fragment {
                         "https://foundit-24436-default-rtdb.asia-southeast1.firebasedatabase.app")
                 .getReference("reports");
 
-        // ====== MAP CONFIG ======
+        // ===== MAP CONFIG =====
         Configuration.getInstance().setUserAgentValue(getContext().getPackageName());
         mapPreview.setBuiltInZoomControls(true);
         mapPreview.setMultiTouchControls(true);
@@ -138,18 +136,19 @@ public class EditReportFragment extends Fragment {
         previewMarker = new Marker(mapPreview);
         mapPreview.getOverlays().add(previewMarker);
 
-        // ====== GET REPORT FROM ARGUMENTS ======
+        // ===== GET REPORT FROM ARGUMENTS =====
         if (getArguments() != null) {
             report = (ReportItem) getArguments().getSerializable("report");
             if (report != null) populateFields(report);
         }
 
-        // ====== CLICK LISTENERS ======
+        // ===== CLICK LISTENERS =====
         etDate.setOnClickListener(v -> showDatePicker());
         btnCapture.setOnClickListener(v -> openCamera());
         btnGallery.setOnClickListener(v -> openGallery());
         btnPickLocation.setOnClickListener(v -> openMapPicker());
         btnUpdate.setOnClickListener(v -> updateReport());
+        btnDelete.setOnClickListener(v -> deleteReport());
 
         imageView.setOnClickListener(v -> {
             if (!imageBase64.isEmpty()) {
@@ -181,17 +180,14 @@ public class EditReportFragment extends Fragment {
         previewMarker.setPosition(new GeoPoint(latitude, longitude));
         mapPreview.getController().setCenter(new GeoPoint(latitude, longitude));
 
-        // ===== CATEGORY =====
         if ("Lost".equalsIgnoreCase(r.getCategory())) rbLost.setChecked(true);
         else if ("Found".equalsIgnoreCase(r.getCategory())) rbFound.setChecked(true);
 
-        // ===== STATUS =====
         if ("open".equalsIgnoreCase(r.getStatus())) rbOpen.setChecked(true);
         else if ("claimed".equalsIgnoreCase(r.getStatus())) rbClaimed.setChecked(true);
         else if ("resolved".equalsIgnoreCase(r.getStatus())) rbResolved.setChecked(true);
     }
 
-    // ===== DATE PICKER =====
     private void showDatePicker() {
         Calendar calendar = Calendar.getInstance();
         new DatePickerDialog(getContext(),
@@ -206,7 +202,6 @@ public class EditReportFragment extends Fragment {
         ).show();
     }
 
-    // ===== CAMERA & GALLERY =====
     private void openCamera() {
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, REQUEST_CAMERA);
@@ -223,7 +218,6 @@ public class EditReportFragment extends Fragment {
         startActivityForResult(intent, REQUEST_MAP_PICK);
     }
 
-    // ===== UPDATE REPORT =====
     private void updateReport() {
         if (report == null) return;
 
@@ -245,7 +239,6 @@ public class EditReportFragment extends Fragment {
             return;
         }
 
-        // SET NEW DATA
         report.setItemName(itemName);
         report.setDescription(description);
         report.setLocation(location);
@@ -257,21 +250,44 @@ public class EditReportFragment extends Fragment {
         report.setLongitude(longitude);
         report.setImageBase64(imageBase64);
 
-        // UPDATE FIREBASE
         databaseReports.child(report.getId()).setValue(report)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(getContext(), "Report updated successfully", Toast.LENGTH_SHORT).show();
-                    getActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.main_container, new HomeFragment())
-                            .commit();
+
+                    // ✅ Navigate to MainActivity + HomeFragment
+                    if (getContext() != null) {
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        intent.putExtra("fragment_to_load", "home");
+                        startActivity(intent);
+                        requireActivity().finish();
+                    }
 
                     pushNotificationForUpdate(currentUserId, "Your report \"" + itemName + "\" has been updated.");
                 })
                 .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to update report", Toast.LENGTH_SHORT).show());
     }
 
-    // ===== IMAGE BASE64 =====
+    private void deleteReport() {
+        if (report == null) return;
+
+        databaseReports.child(report.getId()).removeValue()
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "Report deleted successfully", Toast.LENGTH_SHORT).show();
+
+                    // ✅ Push notification for delete
+                    pushNotificationForUpdate(currentUserId, "Your report \"" + report.getItemName() + "\" has been deleted.");
+
+                    // ✅ Navigate to MainActivity + HomeFragment
+                    if (getContext() != null) {
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        intent.putExtra("fragment_to_load", "home");
+                        startActivity(intent);
+                        requireActivity().finish();
+                    }
+                })
+                .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to delete report", Toast.LENGTH_SHORT).show());
+    }
+
     private Bitmap decodeBase64(String base64) {
         byte[] decoded = Base64.decode(base64, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decoded, 0, decoded.length);
@@ -283,8 +299,8 @@ public class EditReportFragment extends Fragment {
         return Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
     }
 
-    // ===== NOTIFICATION =====
     private void pushNotificationForUpdate(String ownerId, String message) {
+        // Push to Firebase
         DatabaseReference ref = FirebaseDatabase.getInstance(
                         "https://foundit-24436-default-rtdb.asia-southeast1.firebasedatabase.app")
                 .getReference("notifications")
@@ -294,6 +310,7 @@ public class EditReportFragment extends Fragment {
         NotificationItem item = new NotificationItem(message, System.currentTimeMillis(), false);
         ref.setValue(item);
 
+        // System notification
         showSystemNotification(message);
     }
 
@@ -339,7 +356,6 @@ public class EditReportFragment extends Fragment {
         manager.notify((int) System.currentTimeMillis(), builder.build());
     }
 
-    // ===== HANDLE ACTIVITY RESULT =====
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

@@ -234,7 +234,7 @@ public class ReportFragment extends Fragment {
                             .commit();
 
 
-                    // 🔔 Notification untuk owner sendiri
+                    // Notification
                     pushNotificationForSubmit(currentUserId, "You have successfully submitted a report: \"" + itemName + "\"");
 
                     clearForm();

@@ -1,8 +1,9 @@
 package com.example.foundit;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
-public class ReportItem implements Serializable { // ✅ Tambah implements Serializable
+public class ReportItem implements Serializable {
 
     private String id;
     private String itemName;
@@ -12,15 +13,15 @@ public class ReportItem implements Serializable { // ✅ Tambah implements Seria
     private String contact;
     private String imageBase64;
     private String ownerId;
-    private String date; // dd/MM/yyyy
-
-    // ✅ NEW FIELDS
+    private String date;
     private double latitude;
     private double longitude;
-    private String status; // open / claimed / resolved
+    private String status;
+    private HashMap<String, Boolean> likes;
 
-    // Required empty constructor for Firebase
-    public ReportItem() {}
+    public ReportItem() {
+        this.likes = new HashMap<>();
+    }
 
     public ReportItem(String id, String itemName, String category, String location,
                       String description, String contact, String imageBase64,
@@ -34,11 +35,10 @@ public class ReportItem implements Serializable { // ✅ Tambah implements Seria
         this.imageBase64 = imageBase64;
         this.ownerId = ownerId;
         this.date = date;
-
-        // Default values for new fields
         this.latitude = 0.0;
         this.longitude = 0.0;
         this.status = "open";
+        this.likes = new HashMap<>();
     }
 
     // ===== GETTERS =====
@@ -51,10 +51,14 @@ public class ReportItem implements Serializable { // ✅ Tambah implements Seria
     public String getImageBase64() { return imageBase64; }
     public String getOwnerId() { return ownerId; }
     public String getDate() { return date; }
-
     public double getLatitude() { return latitude; }
     public double getLongitude() { return longitude; }
     public String getStatus() { return status; }
+    public HashMap<String, Boolean> getLikes() { return likes; }
+
+    public int getLikesCount() {
+        return likes != null ? likes.size() : 0;
+    }
 
     // ===== SETTERS =====
     public void setId(String id) { this.id = id; }
@@ -66,9 +70,8 @@ public class ReportItem implements Serializable { // ✅ Tambah implements Seria
     public void setImageBase64(String imageBase64) { this.imageBase64 = imageBase64; }
     public void setOwnerId(String ownerId) { this.ownerId = ownerId; }
     public void setDate(String date) { this.date = date; }
-
-    // ✅ NEW SETTERS
     public void setLatitude(double latitude) { this.latitude = latitude; }
     public void setLongitude(double longitude) { this.longitude = longitude; }
     public void setStatus(String status) { this.status = status; }
+    public void setLikes(HashMap<String, Boolean> likes) { this.likes = likes; }
 }
