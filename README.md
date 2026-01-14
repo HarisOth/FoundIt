@@ -72,7 +72,6 @@ FoundIt is a community-driven mobile application designed to simplify the proces
 ```markdown
 ## 📖 How to Use This App
 
-```bash
 # ============================================
 # REPORTING A LOST/FOUND ITEM
 # ============================================
