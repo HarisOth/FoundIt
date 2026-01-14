@@ -70,9 +70,6 @@ public class ProfileFragment extends Fragment {
         view.findViewById(R.id.cardAbout).setOnClickListener(v ->
                 startActivity(new Intent(getContext(), AboutUsActivity.class)));
 
-        view.findViewById(R.id.cardForgot).setOnClickListener(v ->
-                startActivity(new Intent(getContext(), ForgotPasswordActivity.class)));
-
         view.findViewById(R.id.cardSignOut).setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(getContext(), "Signed out", Toast.LENGTH_SHORT).show();

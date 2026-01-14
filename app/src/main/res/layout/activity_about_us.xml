@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFDE7"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,15 +23,419 @@
             android:textStyle="bold"
             android:layout_marginBottom="24dp"/>
 
-        <!-- About Text -->
+        <!-- App Description Section -->
         <TextView
-            android:id="@+id/tvAbout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Loading..."
-            android:textSize="16sp"
-            android:textColor="#795548"
-            android:lineSpacingExtra="8dp"/>
+            android:text="App Description"
+            android:textColor="#F57F17"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"
+            android:gravity="center"/>
+
+        <!-- Description Box dengan center alignment -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFF9C4"
+            android:padding="20dp"
+            android:layout_marginBottom="32dp"
+            android:elevation="2dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvAbout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#795548"
+                android:lineSpacingExtra="6dp"
+                android:gravity="center"
+                android:text="FoundIt is a mobile application designed to streamline the process of locating lost items and reporting found belongings.\n\nOur mission is to help people reunite with their lost items through community cooperation and smart technology."/>
+
+            <!-- Separator Line -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#FFD54F"
+                android:layout_marginVertical="16dp"/>
+
+            <!-- Key Features Section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Key Features"
+                android:textColor="#F57F17"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Feature 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="GPS Location Pinning"
+                    android:textColor="#5D4037"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+            <!-- Feature 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Image Uploads"
+                    android:textColor="#5D4037"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+            <!-- Feature 3 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Real-time Notifications"
+                    android:textColor="#5D4037"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+            <!-- Feature 4 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Interactive Map View"
+                    android:textColor="#5D4037"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+            <!-- Feature 5 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="User Profile Management"
+                    android:textColor="#5D4037"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+            <!-- Feature 6 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="0dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Community-based Platform"
+                    android:textColor="#5D4037"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Team Members Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Our Team"
+            android:textColor="#F57F17"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"/>
+
+        <!-- Team Member 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            android:background="#FFF9C4"
+            android:padding="12dp"
+            android:gravity="center_vertical"
+            android:elevation="2dp">
+
+            <!-- Profile Picture 1 -->
+            <ImageView
+                android:id="@+id/ivMember1"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/profile1"
+                android:contentDescription="MOHAMMAD HARIS HAIQAL profile"
+                android:scaleType="centerCrop"
+                android:layout_marginEnd="16dp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvMember1Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MOHAMMAD HARIS HAIQAL BIN OTHMAN"
+                    android:textColor="#5D4037"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:id="@+id/tvMember1ID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Student ID: 2023213578"
+                    android:textColor="#795548"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Team Member 2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            android:background="#FFF9C4"
+            android:padding="12dp"
+            android:gravity="center_vertical"
+            android:elevation="2dp">
+
+            <!-- Profile Picture 2 -->
+            <ImageView
+                android:id="@+id/ivMember2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/profile2"
+                android:contentDescription="NUR SYAFI'AH ADRIENA profile"
+                android:scaleType="centerCrop"
+                android:layout_marginEnd="16dp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvMember2Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NUR SYAFI'AH ADRIENA BINTI ALIDZA"
+                    android:textColor="#5D4037"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:id="@+id/tvMember2ID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Student ID: 2023689932"
+                    android:textColor="#795548"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Team Member 3 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            android:background="#FFF9C4"
+            android:padding="12dp"
+            android:gravity="center_vertical"
+            android:elevation="2dp">
+
+            <!-- Profile Picture 3 -->
+            <ImageView
+                android:id="@+id/ivMember3"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/profile3"
+                android:contentDescription="NUR AFIQAH profile"
+                android:scaleType="centerCrop"
+                android:layout_marginEnd="16dp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvMember3Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NUR AFIQAH BINTI NOORDIN"
+                    android:textColor="#5D4037"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:id="@+id/tvMember3ID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Student ID: 2023299132"
+                    android:textColor="#795548"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Team Member 4 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="32dp"
+            android:background="#FFF9C4"
+            android:padding="12dp"
+            android:gravity="center_vertical"
+            android:elevation="2dp">
+
+            <!-- Profile Picture 4 -->
+            <ImageView
+                android:id="@+id/ivMember4"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/profile4"
+                android:contentDescription="MAS AZRA ATHIRAH profile"
+                android:scaleType="centerCrop"
+                android:layout_marginEnd="16dp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvMember4Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MAS AZRA ATHIRAH BINTI MOHD AZAHARI"
+                    android:textColor="#5D4037"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:id="@+id/tvMember4ID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Student ID: 2023436008"
+                    android:textColor="#795548"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Visit Us Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Visit Our Repository"
+            android:textColor="#F57F17"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:id="@+id/llGitHub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFF9C4"
+            android:padding="16dp"
+            android:gravity="center"
+            android:elevation="4dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <!-- GitHub Icon menggunakan gambar jika ada, atau emoji -->
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_github"
+                android:contentDescription="GitHub icon"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FoundIt on GitHub"
+                android:textColor="#5D4037"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tvGitHubLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="https://github.com/HarisOth/FoundIt"
+                android:textColor="#2196F3"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                android:padding="8dp"
+                android:background="#FFFDE7"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tap to visit our GitHub repository"
+                android:textColor="#795548"
+                android:textSize="14sp"
+                android:textStyle="italic"/>
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>
