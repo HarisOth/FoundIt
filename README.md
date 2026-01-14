@@ -34,29 +34,29 @@ FoundIt is a community-driven mobile application designed to simplify the proces
 ### Authentication & Profile Pages  
 | Page | Screenshot | Description |
 |------|------------|-------------|
-| Register Page | ![Register Page](screenshots/ss1.png) | User registration interface |
-| Login Page | ![Login Page](screenshots/ss2.png) | User login interface |
-| Profile Page | ![Profile Page](screenshots/ss3.png) | User profile management |
-| Edit Profile Page | ![Edit Profile Page](screenshots/ss4.png) | Edit user profile details |
+| Register Page | ![Register Page](ss1.png) | User registration interface |
+| Login Page | ![Login Page](ss2.png) | User login interface |
+| Profile Page | ![Profile Page](ss3.png) | User profile management |
+| Edit Profile Page | ![Edit Profile Page](ss4.png) | Edit user profile details |
 
 ### Main Application Pages  
 | Page | Screenshot | Description |
 |------|------------|-------------|
-| Home Page | ![Home Page](screenshots/ss5.png) | Main dashboard and navigation |
-| Map Page | ![Map Page](screenshots/ss6.png) | Interactive map with lost/found items |
-| Alerts Page | ![Alerts Page](screenshots/ss7.png) | Notifications and alerts view |
+| Home Page | ![Home Page](ss5.png) | Main dashboard and navigation |
+| Map Page | ![Map Page](ss6.png) | Interactive map with lost/found items |
+| Alerts Page | ![Alerts Page](ss7.png) | Notifications and alerts view |
 
 ### Report Management Pages  
 | Page | Screenshot | Description |
 |------|------------|-------------|
-| Upload Report Page | ![Upload Report Page](screenshots/ss8.png) | Submit new lost/found report |
-| Update Report Page | ![Update Report Page](screenshots/ss9.png) | Edit existing reports |
+| Upload Report Page | ![Upload Report Page](ss8.png) | Submit new lost/found report |
+| Update Report Page | ![Update Report Page](ss9.png) | Edit existing reports |
 
 ### Settings & Information Pages  
 | Page | Screenshot | Description |
 |------|------------|-------------|
-| Notification Setting Page | ![Notification Setting Page](screenshots/ss10.png) | Configure notification preferences |
-| About Us Page | ![About Us Page](screenshots/ss11.png) | Application information and team details |
+| Notification Setting Page | ![Notification Setting Page](ss10.png) | Configure notification preferences |
+| About Us Page | ![About Us Page](ss11.png) | Application information and team details |
 
 ---
 
