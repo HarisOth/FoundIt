@@ -62,88 +62,66 @@ FoundIt is a community-driven mobile application designed to simplify the proces
 
 ## Installation  
 
-1. Click the **"Code"** button on this repository
-2. Select **"Download ZIP"**
-3. Extract the ZIP file to your preferred directory
-4. Open the project in Android Studio / Xcode / your preferred IDE
+1. Click the **"Code"** button on this repository  
+2. Select **"Download ZIP"**  
+3. Extract the ZIP file to your preferred directory  
+4. Open the project in Android Studio / Xcode / your preferred IDE  
 
 ---
 
-```markdown
 ## 📖 How to Use This App
 
-# ============================================
-# REPORTING A LOST/FOUND ITEM
-# ============================================
-1. Tap the + (Add) Icon on the Home Page or Map Page
-
+### REPORTING A LOST/FOUND ITEM
+1. Tap the **+ (Add)** Icon on the Home Page
 2. Fill in Item Details:
-   • Item Name: Enter the name of the lost/found item
-   • Description: Provide detailed description
-   • Location:
-     - Type address manually OR
-     - Tap "Pin My Location" button to automatically get your current GPS coordinates
-   • Contact Number: Enter your phone number
-   • Date: Select the date when item was lost/found
+   - **Item Name:** Enter the name of the lost/found item  
+   - **Description:** Provide a detailed description  
+   - **Location:**  
+     - Type address manually 
+     - Tap **"Pin My Location"** to automatically get current GPS coordinates  
+   - **Contact Number:** Enter your phone number  
+   - **Date:** Select the date when the item was lost/found  
+3. **Upload Image:**  
+   - Tap **"Upload Photo"**  
+   - Choose either:  
+     - **Take Photo** (using camera)  
+     - **Select from Gallery**  
+4. **Submit Report:**  
+   - Tap **"Submit"**  
+   - A success notification will confirm your report submission  
 
-3. Upload Image:
-   • Tap "Upload Photo" button
-   • Choose either:
-     - Take Photo (using camera)
-     - Select from Gallery
+### RECEIVING & RESPONDING TO REPORTS
+1. **Check Notifications:**  
+   - Go to **Alerts Page**
+   - Receive push notifications when someone likes your report  
+2. **Contacting the Reporter:**  
+   - Open item details from Home  
+   - Tap **"Direct Call"** to call the reporter directly  
+3. **Waiting for Response:**  
+   - If you reported a lost item, wait for other users to contact you  
+   - Ensure your phone is reachable for calls  
 
-4. Submit Report:
-   • Tap "Submit" button
-   • You will receive a success notification confirming your report has been submitted
+### MANAGING YOUR PROFILE
+1. Go to **Profile Page** from the navigation menu  
+2. **Edit Profile:**  
+   - Tap **"Edit Profile"**  
+   - Update your personal information  
+   - Save changes  
+3. **Notification Settings:**  
+   - Go to **Notification Settings Page**  
+   - Configure alert preferences  
 
-# ============================================
-# RECEIVING & RESPONDING TO REPORTS
-# ============================================
-1. Check Notifications:
-   • Go to Alerts Page to see new reports near you
-   • You'll receive push notifications when someone like your report
-
-2. Contacting the Reporter:
-   • Open the item details from Home
-   • Tap the "Direct Call" button
-   • This will automatically open your phone app with the reporter's contact number
-
-3. Waiting for Response:
-   • If you reported a lost item, wait for other users to contact you
-   • Ensure your phone is reachable for calls
-
-# ============================================
-# MANAGING YOUR PROFILE
-# ============================================
-1. Go to Profile Page from the navigation menu
-
-2. Edit Profile:
-   • Tap "Edit Profile" button
-   • Update your personal information
-   • Save changes
-
-3. Notification Settings:
-   • Go to Notification Settings Page
-   • Configure your alert preferences
-
-# ============================================
-# USING THE MAP FEATURE
-# ============================================
-1. Open Map Page
-
-2. View Items:
-   • Lost/found items appear as pins on the map
-   • Different colors indicate:
-     🔴 Red: Lost items
-     🟢 Blue: Found items
-
-3. Filter & Search:
-   • Use filters to show only lost or found items
-   • Search by item name or location
-
-4. Get Directions:
-   • Tap any pin to see item details
-
+### USING THE MAP FEATURE
+1. Open **Map Page**  
+2. **View Items:**  
+   - Lost and found items appear as pins on the map  
+   - Pin colors:  
+     🔴 Red: Lost items  
+     🟢 Blue: Found items  
+3. **Filter & Search:**  
+   - Use filters to show only lost or found items and etc.  
+   - Search by item name
+   
 ---
 
 ## 🙏 Thank You!  
