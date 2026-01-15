@@ -69,7 +69,7 @@ FoundIt is a community-driven mobile application designed to simplify the proces
 
 ---
 
-## 📖 How to Use This App
+## How to Use This App
 
 ### REPORTING A LOST/FOUND ITEM
 1. Tap the **+ (Add)** Icon on the Home Page
